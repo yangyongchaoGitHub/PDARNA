@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_upload_check_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_color"
+        android:text="数据上传"
+        android:gravity="center"
+        android:textColor="@color/bg_white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"/>
+
+    <TextView
+        android:id="@+id/tv_upload_success_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_black"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:text="@string/upload_success"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_upload_success_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        android:textColor="@color/bg_black"
+        android:singleLine="false"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_upload_success_bottom_exit"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="返回"
+        android:textColor="@color/bg_white"
+        android:background="@color/bg_color"
+        android:gravity="center"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

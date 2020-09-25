@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/bg_white"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_input_login_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_color"
+        android:text="@string/input_active"
+        android:gravity="center"
+        android:textColor="@color/bg_white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"/>
+
+    <ImageButton
+        android:id="@+id/btn_input_login_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@mipmap/icon_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginStart="10dp"
+        app:layout_constraintWidth_percent="0.08"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_input_login_title"/>
+
+    <TextView
+        android:id="@+id/tv_input_login_qrcode_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18dp"
+        android:textColor="@color/bg_black"
+        android:text="@string/input_active"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/et_a_code"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:background="@drawable/edittext_rect"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_login_query"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:text="@string/query"
+        android:textColor="@color/bg_white"
+        android:background="@color/bg_color"
+        android:gravity="center"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

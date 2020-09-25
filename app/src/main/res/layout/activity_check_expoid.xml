@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_upload_check_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_color"
+        android:text="校验项目"
+        android:gravity="center"
+        android:textColor="@color/bg_white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"/>
+
+    <ImageButton
+        android:visibility="gone"
+        android:id="@+id/btn_upload_check_expo_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@mipmap/icon_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginStart="10dp"
+        app:layout_constraintWidth_percent="0.08"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_upload_check_title"/>
+
+    <TextView
+        android:id="@+id/tv_upload_check_expo_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_upload_check_title"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:textColor="@color/bg_black"
+        android:text="输入项目id"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/et_upload_check_expo_id"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/tv_upload_check_expo_text"
+        android:background="@drawable/edittext_rect"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_upload_check_expo_addr_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_upload_check_expo_id"
+        android:gravity="center"
+        android:textSize="17dp"
+        android:textColor="@color/bg_black"
+        android:text="输入门禁地点"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/et_upload_check_expo_address"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_below="@+id/tv_upload_check_expo_addr_text"
+        android:background="@drawable/edittext_rect"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintVertical_bias="0.65"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_upload_check_expo_confirm"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:text="校验"
+        android:textColor="@color/bg_white"
+        android:background="@color/bg_color"
+        android:gravity="center"
+        android:textSize="18dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

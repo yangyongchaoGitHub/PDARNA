@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg1"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dataexpo.zmt.MainActivity">-->
+    <TextView
+        android:id="@+id/tv_input_idcard_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_color"
+        android:text="@string/input_active"
+        android:gravity="center"
+        android:textColor="@color/bg_white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.07"/>
+
+    <ImageButton
+        android:id="@+id/btn_input_idcard_back"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@mipmap/icon_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        android:layout_marginStart="10dp"
+        app:layout_constraintWidth_percent="0.08"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_input_idcard_title"/>
+
+
+    <ImageView
+        android:id="@+id/iv_head"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
+        />
+
+    <TextView
+        android:id="@+id/tv_active_code"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@color/bg_black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:maxLength="50"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintVertical_bias="0.50"/>
+
+    <EditText
+        android:id="@+id/tv_name_value"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@color/bg_black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:hint="姓名"
+        android:gravity="center"
+        android:maxLength="50"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_scan"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_line" />
+
+    <View
+        android:id="@+id/iv_line"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@color/bg_deep_gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.70">
+    </View>
+
+    <EditText
+        android:id="@+id/tv_id_value"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@color/bg_black"
+        android:hint="身份证/编码"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        android:maxLength="50"
+        android:gravity="center"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="@+id/btn_scan"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintTop_toTopOf="@+id/iv_line"
+        />
+
+    <Button
+        android:id="@+id/btn_scan"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:textSize="22dp"
+        android:text="提交"
+        android:textColor="@color/bg_white"
+        android:background="@drawable/rect_blue"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99"
+        />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/iv_menu"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@mipmap/main_select_white_x"
+        app:layout_constraintWidth_percent="0.12"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.00"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_expoId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="项目id："
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="@+id/iv_menu"
+        app:layout_constraintLeft_toRightOf="@+id/iv_menu"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_menu"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_expoId_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="@+id/tv_expoId"
+        app:layout_constraintLeft_toRightOf="@+id/tv_expoId"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_expoId"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_gateaddress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_expoId"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_expoId"
+        app:layout_constraintWidth_percent="0.35"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="当天总数："
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_total_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toEndOf="@+id/tv_total"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_total" />
+
+    <TextView
+        android:id="@+id/tv_guest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="访客："
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_guest_value"
+        app:layout_constraintEnd_toStartOf="@+id/tv_guest_value"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_guest_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="正常"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26"
+        />
+
+    <EditText
+        android:visibility="gone"
+        android:id="@+id/tv_temp_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="@color/bg_white"
+        android:background="@android:color/transparent"
+        app:layout_constraintVertical_bias="0.45"
+        android:textSize="80dp"
+        android:hint="--.--"
+        android:digits="0123456789"
+        android:textStyle="bold"
+        android:maxLength="5"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="身份证号码"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="姓名"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.20"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_sex"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="性别"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.25"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_sex_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_sex" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_n"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="民族"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.30"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_n_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_n" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="出生"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_create_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_create" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_addr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="地址"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.40"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_addr_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_addr" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_plc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="签发单位"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.45"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_plc_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_plc" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="有效期"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_data_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_data" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/bg_white"
+        android:text="扫码结果"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/tv_code_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.7"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:textColor="@color/bg_white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@+id/tv_code" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btn_last"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="5dp"
+        android:layout_gravity="center"
+        android:text="上一步"
+        android:textColor="@color/bg_white"
+        android:background="@drawable/btn_selector"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99"
+        />
+
+
+<!--    <TextView-->
+<!--        android:text="提示：请按键进行扫码"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingRight="20dp"-->
+<!--        android:paddingTop="10dp"/>-->
+
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingRight="20dp"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingTop="10dp"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:text="耗时："-->
+<!--            android:textAlignment="textStart"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/costTime"-->
+<!--            android:text="&#45;&#45;"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingRight="20dp"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingTop="10dp"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:text="码制："-->
+<!--            android:textAlignment="textStart"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/barcodeType"-->
+<!--            android:text="&#45;&#45;"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--    </LinearLayout>-->
+<!--    <LinearLayout-->
+<!--        android:orientation="horizontal"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingRight="20dp"-->
+<!--        android:paddingLeft="20dp"-->
+<!--        android:paddingTop="10dp"-->
+<!--        >-->
+<!--        <TextView-->
+<!--            android:text="内容："-->
+<!--            android:textAlignment="textStart"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/resultView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text=""-->
+<!--        android:paddingRight="20dp"-->
+<!--        android:paddingLeft="20dp"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

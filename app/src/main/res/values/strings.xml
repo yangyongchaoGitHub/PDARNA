@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">数展激活认证</string>
+
+    <!-- 扫码状态  -->
+    <string name="scan_status_default">无</string>
+    <string name="scan_status_success">解码成功</string>
+    <string name="scan_status_failed">解码失败</string>
+    <string name="scan_status_cancel">用户取消</string>
+    <string name="upload_no_close">数据上传中，请不要关闭电源</string>
+    <string name="upload_success">上传完成</string>
+    <string name="upload_success_value">本次上传%1$d条数据</string>
+    <string name="confirm">确认</string>
+    <string name="input_active">输入激活码</string>
+    <string name="query">点击查询</string>
+
+
+    <string name="digits_num">0123456789abcdefghijklmnopqrstuvwxyzQWERTYUIOPASDFGHJKLZXCVBNM</string>
+</resources>
