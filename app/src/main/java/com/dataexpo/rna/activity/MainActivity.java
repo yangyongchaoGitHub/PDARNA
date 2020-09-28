@@ -6,6 +6,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,11 +15,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,8 +79,8 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
     //private TextView barcodeType;
     private EditText tv_temp_value;
     private TextView tv_code_value;
-    private EditText tv_idcard;
-    private EditText tv_name_value;
+    private TextView tv_idcard;
+    private TextView tv_name_value;
     private TextView tv_sex_value;
     private TextView tv_n_value;
     private TextView tv_create_value;
@@ -87,7 +91,6 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
     private ImageView iv_menu;
     private Button btn_scan;
     private Button btn_last;
-
 
     private TextView tv_total_value;
     private TextView tv_a_code;
@@ -115,11 +118,12 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
     private int rid = 0;
     private int total = 0;
 
+    private boolean bResult = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = MainActivity.this;
-        DBUtils.getInstance().create(this);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
@@ -330,6 +334,12 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
     }
 
     private void commit() {
+        if (!bResult) {
+            Log.i(TAG, "bResult 1 " + bResult);
+            return;
+        }
+
+        Log.i(TAG, "bResult 2 " + bResult);
         String name = tv_name_value.getText().toString();
         String idcard = tv_idcard.getText().toString();
 
@@ -347,16 +357,21 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
         hashMap.put("cardFace", "");
 
         final String url = URLs.pdaActiveSignUp;
+        bResult = false;
 
         RequestCall call = HttpService.postWithParams(mContext, url, hashMap, ++rid, new HttpCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                bResult = true;
+                Log.i(TAG, "bResult 3 " + bResult);
                 Toast.makeText(mContext, "上传失败", Toast.LENGTH_SHORT).show();
                 Log.i(TAG, e.toString());
             }
 
             @Override
             public void onResponse(String response, final int id) {
+                bResult = true;
+                Log.i(TAG, "bResult 4 " + bResult);
                 Log.i(TAG, "onResponse id : " + id);
                 final MsgBean result = new Gson().fromJson(response, MsgBean.class);
 
@@ -367,9 +382,30 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
                             if (result.data != null) {
                                 double r = (double) result.data;
                                 if (r == 1) {
-                                    Toast.makeText(mContext, "激活成功", Toast.LENGTH_SHORT).show();
+                                    Toast toast = new Toast(mContext);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    ImageView imageView = new ImageView(mContext);
+                                    imageView.setImageResource(R.drawable.active_success);
+                                    LinearLayout linearLayout = new LinearLayout(mContext);
+                                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+                                    linearLayout.addView(imageView);
+                                    toast.setView(linearLayout);
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.show();
+
+                                    //Toast.makeText(mContext, "激活成功", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(mContext, "证件已激活", Toast.LENGTH_SHORT).show();
+                                    Toast toast = new Toast(mContext);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    ImageView imageView = new ImageView(mContext);
+                                    imageView.setImageResource(R.drawable.idcard_is_active);
+                                    LinearLayout linearLayout = new LinearLayout(mContext);
+                                    linearLayout.setOrientation(LinearLayout.VERTICAL);
+                                    linearLayout.addView(imageView);
+                                    toast.setView(linearLayout);
+                                    toast.setDuration(Toast.LENGTH_SHORT);
+                                    toast.show();
+                                    //Toast.makeText(mContext, "证件已激活", Toast.LENGTH_SHORT).show();
                                 }
 
                                 Intent intent = new Intent();
@@ -381,6 +417,16 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
                                 finish();
                             }
                         } else if (result.code == 101) {
+                            Toast toast = new Toast(mContext);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            ImageView imageView = new ImageView(mContext);
+                            imageView.setImageResource(R.drawable.code_is_using);
+                            LinearLayout linearLayout = new LinearLayout(mContext);
+                            linearLayout.setOrientation(LinearLayout.VERTICAL);
+                            linearLayout.addView(imageView);
+                            toast.setView(linearLayout);
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.show();
                             Toast.makeText(mContext, "已超过最大激活次数", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(mContext, "激活失败", Toast.LENGTH_SHORT).show();
@@ -484,7 +530,7 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
                     break;
                 case ByteUtil.READ_CARD_FAILED:
                     Log.e("Info","enter READ_CARD_FAILED");
-
+                    Toast.makeText(activity,"读卡失败，请关闭其他身份证读取软件",Toast.LENGTH_SHORT).show();
                     if(78 !=nfcCardReaderAPI.getErrorFlag()){
                         String message = nfcCardReaderAPI.getMessage();
 
@@ -500,7 +546,7 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
                 case ByteUtil.READ_CARD_SUCCESS:
                     Log.i("Info","enter READ_CARD_SUCCESS");
 
-                    if (activity.mStatus == activity.STATUS_INIT || activity.mStatus == activity.STATUS_INPUT_CODEORID) {
+                    //if (activity.mStatus == activity.STATUS_INIT || activity.mStatus == activity.STATUS_INPUT_CODEORID) {
                         Toast.makeText(activity, "读卡成功", Toast.LENGTH_SHORT).show();
                         IdentityCard card = (IdentityCard) msg.obj;
                         if (card != null) {
@@ -539,10 +585,12 @@ public class MainActivity extends BascActivity implements View.OnClickListener {
                                     activity.mStatus = activity.STATUS_INPUT_TEMPERATURE;
                                     activity.bNFCInput = true;
                                     activity.tv_temp_value.requestFocus();
+                                    //activity.tv_idcard.setSelection(activity.tv_addr_value.getText().toString().length());
+                                    //activity.tv_addr_value.setSelection(activity.tv_addr_value.getText().toString().length());
                                 }
                             });
                         }
-                    }
+                    //}
                     break;
                 case ByteUtil.MESSAGE_VALID_OTGSTART:
                     Log.i("Info","enter MESSAGE_VALID_OTGSTART");

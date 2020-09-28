@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg1"
+    android:background="@drawable/bg5"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +17,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/bg_color"
-        android:text="@string/input_active"
+        android:text="输入或读取身份证"
         android:gravity="center"
         android:textColor="@color/bg_white"
         android:textSize="18dp"
@@ -72,7 +72,7 @@
         app:layout_constraintHeight_percent="0.12"
         app:layout_constraintVertical_bias="0.50"/>
 
-    <EditText
+    <TextView
         android:id="@+id/tv_name_value"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -99,7 +99,7 @@
         app:layout_constraintVertical_bias="0.70">
     </View>
 
-    <EditText
+    <TextView
         android:id="@+id/tv_id_value"
         android:layout_width="0dp"
         android:layout_height="0dp"

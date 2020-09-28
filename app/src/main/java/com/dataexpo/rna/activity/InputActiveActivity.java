@@ -2,14 +2,22 @@ package com.dataexpo.rna.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dataexpo.rna.BascActivity;
@@ -33,13 +41,20 @@ import static com.dataexpo.rna.common.Utils.INPUT_NULL;
 import static com.dataexpo.rna.common.Utils.INPUT_SUCCESS;
 
 
-public class InputActiveActivity extends BascActivity implements View.OnClickListener, DecodeResultListener {
+public class InputActiveActivity extends BascActivity implements View.OnClickListener, DecodeResultListener, TextWatcher {
     private final String TAG = InputActiveActivity.class.getSimpleName();
     private Context mContext;
     private EditText et_a_code;
+    private TextView tv_version;
+
     private String expo_id;
     HashMap<Integer, Integer> soundMap = new HashMap<Integer, Integer>();
     private SoundPool soundPool;
+
+    private boolean bResult = true;
+
+    private int exitCount = 0;
+    private long exitTime = System.currentTimeMillis();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +67,18 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
         initData();
         CamDecodeAPI.getInstance(mContext)
                 .SetOnDecodeListener(this);
+        et_a_code.addTextChangedListener(this);
+
+        // 获取packagemanager的实例
+        PackageManager packageManager = getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = null;
+        try {
+            packInfo = packageManager.getPackageInfo(getPackageName(),0);
+            tv_version.setText("V:" + packInfo.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initData() {
@@ -66,6 +93,8 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
         et_a_code = findViewById(R.id.et_a_code);
         findViewById(R.id.btn_input_login_back).setOnClickListener(this);
         findViewById(R.id.tv_login_query).setOnClickListener(this);
+        tv_version = findViewById(R.id.tv_version);
+
     }
 
     private void playSound() {
@@ -89,9 +118,9 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
 
     @Override
     protected void onResume() {
-       /* if (!et_phone_or_qrcode.hasFocus()) {
-            et_phone_or_qrcode.requestFocus();
-        }*/
+        if (!et_a_code.hasFocus()) {
+            et_a_code.requestFocus();
+        }
         super.onResume();
     }
 
@@ -107,7 +136,6 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
                     CamDecodeAPI.getInstance(mContext).ScanBarcode(
                             mContext);
                 } else {
-
                     queryInfo();
                 }
                 break;
@@ -117,7 +145,22 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_ENTER &&
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK &&
+                event.getAction() == KeyEvent.ACTION_DOWN) {
+
+            if (System.currentTimeMillis() - exitTime < 2000) {
+                if (++exitCount == 3) {
+                    exitTime = System.currentTimeMillis();
+                    InputActiveActivity.this.finish();
+                }
+            } else {
+                exitTime = System.currentTimeMillis();
+                exitCount = 0;
+            }
+            return false;
+        }
+
+        if ((event.getKeyCode() == 600 || event.getKeyCode() == 601 || event.getKeyCode() == 602) &&
                 event.getAction() == KeyEvent.ACTION_DOWN) {
             if ("".equals(et_a_code.getText().toString())) {
                 CamDecodeAPI.getInstance(mContext).ScanBarcode(
@@ -132,6 +175,11 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
     }
 
     private void queryInfo() {
+        if (!bResult) {
+            return;
+        }
+        bResult = false;
+
         String code = et_a_code.getText().toString();
 
         if (checkInput(code) == INPUT_SUCCESS) {
@@ -143,6 +191,7 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
             HttpService.getWithParams(mContext, url, hashMap, new HttpCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
+                    bResult = true;
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -155,14 +204,39 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
 
                 @Override
                 public void onResponse(String response, int id) {
+                    bResult = true;
                     final MsgBean userInfo = new Gson().fromJson(response, MsgBean.class);
                     if (userInfo.code == 100) {
                         //激活码不存在
-                        Toast.makeText(mContext, "激活码不存在", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "激活码不存在", Toast.LENGTH_SHORT).show();
+                        Toast toast = new Toast(InputActiveActivity.this);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        ImageView imageView = new ImageView(InputActiveActivity.this);
+                        imageView.setImageResource(R.drawable.code_is_not_fount);
+                        LinearLayout linearLayout = new LinearLayout(InputActiveActivity.this);
+                        linearLayout.addView(imageView);
+//                        TextView tv = new TextView(InputActiveActivity.this);
+//                        tv.setTextSize(30);
+//                        tv.setText("提示文字");
+//                        linearLayout.addView(tv);
+                        toast.setView(linearLayout);
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.show();
+
 
                     } else if (userInfo.code == 101) {
                         //超过最大使用次数
-                        Toast.makeText(mContext, "超过最大使用次数", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(mContext, "超过最大使用次数", Toast.LENGTH_SHORT).show();
+                        Toast toast = new Toast(InputActiveActivity.this);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        ImageView imageView = new ImageView(InputActiveActivity.this);
+                        imageView.setImageResource(R.drawable.code_is_using);
+                        LinearLayout linearLayout = new LinearLayout(InputActiveActivity.this);
+                        linearLayout.setOrientation(LinearLayout.VERTICAL);
+                        linearLayout.addView(imageView);
+                        toast.setView(linearLayout);
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.show();
 
                     } else if (userInfo.code == 200) {
                         Log.i(TAG, "用户数据查找成功" + response);
@@ -170,22 +244,13 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                if (userInfo.data == null) {
-                                    et_a_code.setText("");
-
-                                    Toast.makeText(mContext,
-                                            "用户不存在，请检查输入！！",
-                                            Toast.LENGTH_SHORT).show();
-
-                                } else {
-
-                                    Intent intent = new Intent();
-                                    intent.putExtra("Expo_id", expo_id);
-                                    intent.putExtra("a_code", et_a_code.getText().toString());
-                                    intent.setClass(mContext, MainActivity.class);
-                                    et_a_code.setText("");
-                                    startActivity(intent);
-                                }
+                                //没有取返回数据
+                                Intent intent = new Intent();
+                                intent.putExtra("Expo_id", expo_id);
+                                intent.putExtra("a_code", et_a_code.getText().toString());
+                                intent.setClass(mContext, MainActivity.class);
+                                et_a_code.setText("");
+                                startActivity(intent);
                             }
                         });
                     }
@@ -223,10 +288,29 @@ public class InputActiveActivity extends BascActivity implements View.OnClickLis
 
             if (INPUT_SUCCESS == checkInput(code)) {
                 et_a_code.setText(code);
+                Log.i(TAG, "set Text : " + et_a_code.getSelectionEnd());
+                et_a_code.setSelection(et_a_code.getText().toString().length());
             } else {
                 Toast.makeText(this, "扫描内容异常", Toast.LENGTH_SHORT).show();
             }
         }else {
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//        if (count > 1) {
+//            et_a_code.setSelection(et_a_code.getSelectionEnd());
+//        }
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
     }
 }
